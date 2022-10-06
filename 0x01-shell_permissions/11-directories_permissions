@@ -1,2 +1,2 @@
-#!/bin/bash
-chmod -R d*ugo+x . 11-directories_permissions
+#!/bin/bah
+chmod -R d*ugo+x .

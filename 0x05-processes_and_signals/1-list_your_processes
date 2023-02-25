@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-# bash script for listing PIDs in user formatting
-ps -e u

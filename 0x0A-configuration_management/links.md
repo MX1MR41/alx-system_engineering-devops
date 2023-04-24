@@ -1,0 +1,5 @@
+- https://github.com/voxpupuli/puppet-mode
+- http://puppet-lint.com/
+- https://www.puppet.com/blog
+- https://www.puppet.com/docs/puppet/5.5/types/file.html
+- https://www.digitalocean.com/community/tutorials/an-introduction-to-configuration-management

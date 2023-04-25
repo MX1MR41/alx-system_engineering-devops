@@ -1,1 +1,4 @@
-
+- https://docs.docker.com/desktop/install/mac-install/
+- https://docs.docker.com/desktop/install/windows-install/
+- https://www.liquidweb.com/kb/how-to-install-docker-on-ubuntu-14-04-lts/
+- https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04

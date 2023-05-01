@@ -1,3 +1,4 @@
 - https://www.digitalocean.com/community/tutorials/an-introduction-to-haproxy-and-load-balancing-concepts
 - https://www.techopedia.com/definition/27178/http-header
 - https://haproxy.debian.net/
+- https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-hostname.html

@@ -1,0 +1,24 @@
+What happens when you type https://www.google.com in your browser and press Enter
+A series of actions are taken to fetch the webpage when you input "https://www.google.com" in your browser and hit Enter. Let's dissect it step by step:
+
+DNS Request: The domain name "www.google.com" must first be translated into an IP address. Resolution in the Domain Name System (DNS) is the name of this procedure. Your computer requests DNS information from a DNS server by sending a request to your Internet Service Provider (ISP). Once the IP address for "www.google.com" has been located, the DNS server transmits it back to your computer.
+
+TCP/IP: Once your computer gets "www.google.com"'s IP address, it establishes a Transmission Control Protocol (TCP) connection to the server there. Your computer sends a SYN packet to the server, the server responds with a SYN-ACK packet, and your computer reacts with an ACK packet. This includes a three-way handshake process. This creates a secure connection between your machine and the server that is well-organized and error-checked.
+
+Firewall: A firewall is a network security device that monitors and regulates incoming and outgoing traffic according to specified security rules. A firewall is used before the connection is fully established. The firewall verifies that the connection is valid and untampered with by malicious software.
+
+HTTPS/SSL: As soon as the TCP connection is established, your browser makes a request for the webpage using the HTTPS/SSL protocol. Using HTTPS, which combines HTTP and Secure Sockets Layer (SSL) encryption, you can be sure that any information you send from your browser to the server is secure and protected. In return, the server sends a digital certificate that includes a public key that your browser uses to start a secure connection with the server.
+
+Load-balancing system: If a website receives a lot of requests, it might have several servers to handle the demand. To maintain optimal performance and prevent overwhelming any single server, a load balancer distributes the incoming requests among the available servers in this situation.
+
+Web server: In order to create a secure connection with your browser after receiving the HTTPS request, the web server uses the SSL certificate. It then uses the same secure connection to obtain the requested webpage from its file system or database and send it back to your browser.
+
+Application Server: In certain circumstances, the requesting webpage needs further processing or data from an application server. For instance, if you search on Google, the application server will handle your search request and pull pertinent results from its database.
+
+Database: Lastly, to obtain the data required to complete the request, the application server may query a database. For instance, the application server searches a database of indexed web pages when you perform a search on Google and returns the pertinent results.
+
+To sum up, when you enter "https://www.google.com" into your browser and hit Enter, a number of intricate processes are carried out in the background to fetch the webpage. You can solve potential problems and appreciate the intricacy of the contemporary web by comprehending this series of events.
+
+
+
+

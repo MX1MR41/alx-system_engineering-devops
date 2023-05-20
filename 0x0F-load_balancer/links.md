@@ -3,3 +3,5 @@
 - https://haproxy.debian.net/
 - https://repost.aws/knowledge-center/linux-static-hostname
 - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/set-hostname.html
+- https://www.thegeekstuff.com/2016/01/load-balancer-intro/
+- https://community.f5.com/t5/technical-articles/intro-to-load-balancing-for-developers-the-algorithms/ta-p/273759

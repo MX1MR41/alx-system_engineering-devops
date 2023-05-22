@@ -1,30 +1,23 @@
 #!/usr/bin/python3
-""" Script that uses JSONPlaceholder API to get information about employee """
+"""Export data in the JSON format.
+"""
 import json
 import requests
-import sys
+from sys import argv
 
 
-if __name__ == "__main__":
-    url = 'https://jsonplaceholder.typicode.com/'
+if __name__ == '__main__':
+    user_id = argv[1]
+    users = requests.get('https://jsonplaceholder.typicode.com/users/{}'
+                         .format(user_id)).json()
+    todos = requests.get('https://jsonplaceholder.typicode.com/todos?userId={}'
+                         .format(user_id)).json()
 
-    userid = sys.argv[1]
-    user = '{}users/{}'.format(url, userid)
-    res = requests.get(user)
-    json_o = res.json()
-    name = json_o.get('username')
+    tasks = []
+    for task in todos:
+        tasks.append({'task': task.get('title'),
+                      'completed': task.get('completed'),
+                      'username': users.get('username')})
 
-    todos = '{}todos?userId={}'.format(url, userid)
-    res = requests.get(todos)
-    tasks = res.json()
-    l_task = []
-    for task in tasks:
-        dict_task = {"task": task.get('title'),
-                     "completed": task.get('completed'),
-                     "username": name}
-        l_task.append(dict_task)
-
-    d_task = {str(userid): l_task}
-    filename = '{}.json'.format(userid)
-    with open(filename, mode='w') as f:
-        json.dump(d_task, f)
+    with open('{}.json'.format(user_id), mode='w') as file:
+        json.dump({user_id: tasks}, file)

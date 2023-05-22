@@ -1,27 +1,39 @@
 #!/usr/bin/python3
+
 """
-Exports all tasks in the JSON format.
+Python script that exports data in the JSON format.
 """
+
+from requests import get
 import json
-import requests
 
+if __name__ == "__main__":
+    response = get('https://jsonplaceholder.typicode.com/todos/')
+    data = response.json()
 
-if __name__ == '__main__':
-    url = 'https://jsonplaceholder.typicode.com/users/'
-    users = requests.get(url).json()
+    row = []
+    response2 = get('https://jsonplaceholder.typicode.com/users')
+    data2 = response2.json()
 
-    data = {}
-    for user in users:
-        user_id = str(user.get('id'))
-        data[user_id] = []
+    new_dict1 = {}
 
-        user_tasks = requests.get(url + user_id + '/todos').json()
-        for task in user_tasks:
-            task_data = {}
-            task_data['task'] = task.get('title')
-            task_data['completed'] = task.get('completed')
-            task_data['username'] = user.get('username')
-            data[user_id].append(task_data)
+    for j in data2:
 
-    with open('todo_all_employees.json', 'w') as json_file:
-        json.dump(data, json_file)
+        row = []
+        for i in data:
+
+            new_dict2 = {}
+
+            if j['id'] == i['userId']:
+
+                new_dict2['username'] = j['username']
+                new_dict2['task'] = i['title']
+                new_dict2['completed'] = i['completed']
+                row.append(new_dict2)
+
+        new_dict1[j['id']] = row
+
+    with open("todo_all_employees.json",  "w") as f:
+
+        json_obj = json.dumps(new_dict1)
+        f.write(json_obj)

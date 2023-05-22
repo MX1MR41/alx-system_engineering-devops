@@ -1,34 +1,34 @@
 #!/usr/bin/python3
-""" Script that uses JSONPlaceholder API to get information about employee """
+"""
+Exports data in the CSV format for a given employee ID,
+using data from the JSONPlaceholder API.
+"""
 import csv
 import requests
 import sys
 
 
-if __name__ == "__main__":
-    url = 'https://jsonplaceholder.typicode.com/'
+if __name__ == '__main__':
+    user_id = sys.argv[1]
 
-    userid = sys.argv[1]
-    user = '{}users/{}'.format(url, userid)
-    res = requests.get(user)
-    json_o = res.json()
-    name = json_o.get('username')
+    user_url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
+    response = requests.get(user_url)
+    user_data = response.json()
+    username = user_data.get('username')
 
-    todos = '{}todos?userId={}'.format(url, userid)
-    res = requests.get(todos)
-    tasks = res.json()
-    l_task = []
-    for task in tasks:
-        l_task.append([userid,
-                       name,
-                       task.get('completed'),
-                       task.get('title')])
+    tasks_url = 'https://jsonplaceholder.typicode.com/todos'
+    response = requests.get(tasks_url)
+    tasks_data = response.json()
 
-    filename = '{}.csv'.format(userid)
-    with open(filename, mode='w') as employee_file:
-        employee_writer = csv.writer(employee_file,
-                                     delimiter=',',
-                                     quotechar='"',
-                                     quoting=csv.QUOTE_ALL)
-        for task in l_task:
-            employee_writer.writerow(task)
+    filename = user_id + '.csv'
+    with open(filename, mode='w') as csv_file:
+        writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
+        for task in tasks_data:
+            if task.get('userId') == int(user_id):
+                row = [
+                    user_id,
+                    username,
+                    str(task.get('completed')),
+                    task.get('title')
+                ]
+                writer.writerow(row)

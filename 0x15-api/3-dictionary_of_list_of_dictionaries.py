@@ -1,30 +1,27 @@
 #!/usr/bin/python3
-""" Script that uses JSONPlaceholder API to get information about employee """
+"""
+Exports all tasks in the JSON format.
+"""
 import json
 import requests
-import sys
 
 
-if __name__ == "__main__":
-    url = 'https://jsonplaceholder.typicode.com/'
-    user = '{}users'.format(url)
-    res = requests.get(user)
-    json_o = res.json()
-    d_task = {}
-    for user in json_o:
-        name = user.get('username')
-        userid = user.get('id')
-        todos = '{}todos?userId={}'.format(url, userid)
-        res = requests.get(todos)
-        tasks = res.json()
-        l_task = []
-        for task in tasks:
-            dict_task = {"username": name,
-                         "task": task.get('title'),
-                         "completed": task.get('completed')}
-            l_task.append(dict_task)
+if __name__ == '__main__':
+    url = 'https://jsonplaceholder.typicode.com/users/'
+    users = requests.get(url).json()
 
-        d_task[str(userid)] = l_task
-    filename = 'todo_all_employees.json'
-    with open(filename, mode='w') as f:
-        json.dump(d_task, f)
+    data = {}
+    for user in users:
+        user_id = str(user.get('id'))
+        data[user_id] = []
+
+        user_tasks = requests.get(url + user_id + '/todos').json()
+        for task in user_tasks:
+            task_data = {}
+            task_data['task'] = task.get('title')
+            task_data['completed'] = task.get('completed')
+            task_data['username'] = user.get('username')
+            data[user_id].append(task_data)
+
+    with open('todo_all_employees.json', 'w') as json_file:
+        json.dump(data, json_file)

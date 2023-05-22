@@ -1,34 +1,35 @@
 #!/usr/bin/python3
+
 """
-Exports data in the CSV format for a given employee ID,
-using data from the JSONPlaceholder API.
+Python script that exports data in the CSV format
 """
+
+from requests import get
+from sys import argv
 import csv
-import requests
-import sys
 
+if __name__ == "__main__":
+    response = get('https://jsonplaceholder.typicode.com/todos/')
+    data = response.json()
 
-if __name__ == '__main__':
-    user_id = sys.argv[1]
+    row = []
+    response2 = get('https://jsonplaceholder.typicode.com/users')
+    data2 = response2.json()
 
-    user_url = 'https://jsonplaceholder.typicode.com/users/{}'.format(user_id)
-    response = requests.get(user_url)
-    user_data = response.json()
-    username = user_data.get('username')
+    for i in data2:
+        if i['id'] == int(argv[1]):
+            employee = i['username']
 
-    tasks_url = 'https://jsonplaceholder.typicode.com/todos'
-    response = requests.get(tasks_url)
-    tasks_data = response.json()
+    with open(argv[1] + '.csv', 'w', newline='') as file:
+        writ = csv.writer(file, quoting=csv.QUOTE_ALL)
 
-    filename = user_id + '.csv'
-    with open(filename, mode='w') as csv_file:
-        writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-        for task in tasks_data:
-            if task.get('userId') == int(user_id):
-                row = [
-                    user_id,
-                    username,
-                    str(task.get('completed')),
-                    task.get('title')
-                ]
-                writer.writerow(row)
+        for i in data:
+
+            row = []
+            if i['userId'] == int(argv[1]):
+                row.append(i['userId'])
+                row.append(employee)
+                row.append(i['completed'])
+                row.append(i['title'])
+
+                writ.writerow(row)

@@ -1,0 +1,4 @@
+- https://www.nginx.com/resources/glossary/application-server-vs-web-server/
+- https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-16-04
+- https://docs.gunicorn.org/en/latest/run.html
+- https://doc.ubuntu-fr.org/upstart
